@@ -1,0 +1,7 @@
+@import 'custom';
+//Here we importing _custom.scss file but we don't need to include underscore.
+$default-theme: mat-light-theme($primary, $accent, $warn);
+
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+@include angular-material-theme($default-theme);
