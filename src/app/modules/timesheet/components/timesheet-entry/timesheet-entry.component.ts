@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TimesheetEntry } from '../../page/timesheet/timesheet.component';
+import { TimesheetEntry } from 'src/app/core/models/timesheet-entry.model';
 
 @Component({
   selector: 'mt-timesheet-entry',
@@ -11,5 +11,6 @@ export class TimesheetEntryComponent implements OnInit {
 
   ngOnInit(): void {}
   @Input() dateEntry: TimesheetEntry;
+  @Input() dayName: string;
   panelOpenState = false;
 }

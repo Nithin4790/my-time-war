@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "MyTime": {
+    "my-time-war": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/MyTime",
+            "outputPath": "dist/my-time-war",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "MyTime:build"
+            "browserTarget": "my-time-war:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "MyTime:build:production"
+              "browserTarget": "my-time-war:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "MyTime:build"
+            "browserTarget": "my-time-war:build"
           }
         },
         "test": {
@@ -103,16 +103,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "MyTime:serve"
+            "devServerTarget": "my-time-war:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "MyTime:serve:production"
+              "devServerTarget": "my-time-war:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "MyTime"
+  "defaultProject": "my-time-war"
 }

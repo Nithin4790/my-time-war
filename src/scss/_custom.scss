@@ -2,7 +2,7 @@
 @include mat-core();
 $primary: mat-palette($mat-blue, 900);
 $accent: mat-palette($mat-light-blue, 600, 300, 600);
-$warn: mat-palette($mat-deep-orange, 300, 500, 800);
+$warn: mat-palette($mat-red);
 
 $dark-primary: mat-palette($mat-blue-grey);
 $dark-accent: mat-palette($mat-amber, A200, A100, A400);

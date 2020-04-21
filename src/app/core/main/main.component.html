@@ -30,6 +30,13 @@
       <span>MyTime</span>
       <span class="spacer"></span>
       <div class="web-layout-toolbar" *ngIf="!(isHandset$ | async)">
+        <a [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">Admin</a>
+        <mat-menu #menu="matMenu">
+          <span (mouseleave)="menuTrigger.closeMenu()">
+            <button mat-menu-item>Add/Edit Projects</button>
+            <button mat-menu-item>Review Timesheets</button>
+          </span>
+        </mat-menu>
         <a href="/dashboard">Dashboard</a>
         <a href="/timesheet">Timesheet</a>
         <a href="#">Logout</a>

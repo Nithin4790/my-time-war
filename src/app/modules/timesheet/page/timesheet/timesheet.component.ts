@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TimesheetEntry, getTimesheetEntryInitialState } from 'src/app/core/models/timesheet-entry.model';
 
 @Component({
   selector: 'mt-timesheet',
@@ -7,46 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimesheetComponent implements OnInit {
   constructor() {}
+  weekNumber: number = 0;
   weekDateEntry: TimesheetEntry;
   weekDateEntries: Array<TimesheetEntry>;
+  dayNames: Array<string> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   ngOnInit(): void {
-    this.weekDateEntries = this.getDatesFromCurrentWeek();
+    this.weekDateEntries = this.getDates(this.weekNumber);
   }
 
-  getDatesFromCurrentWeek() {
+  getDates(weekNumber: number) {
     let weekDays: Array<TimesheetEntry> = [];
-    let weekDay: TimesheetEntry = {
-      date: '',
-      hours: 0.0,
-      project: '',
-      projectCategory: '',
-      task: '',
-      comments: '',
-    };
+    let weekDay: TimesheetEntry = getTimesheetEntryInitialState();
     let curr = new Date();
-    for (let i = 1; i <= 7; i++) {
-      let first = curr.getDate() - curr.getDay() + i;
-      let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
-      weekDay.date = day;
+    curr.setDate(curr.getDate() + weekNumber);
+    let firstday = new Date(curr.getTime() - 60 * 60 * 24 * curr.getDay() * 1000);
+    for (let i = 0; i < 7; i++) {
       weekDay = {
-        date: day,
-        hours: 0.0,
-        project: '',
-        projectCategory: '',
-        task: '',
-        comments: '',
+        ...weekDay,
+        date: new Date(curr.getTime() + 60 * 60 * 24 * i * 1000).toISOString().slice(0, 10),
+        dayName: this.dayNames[i],
       };
-      weekDays.push(weekDay);
+      weekDays = [...weekDays, weekDay];
     }
     return weekDays;
   }
-}
-
-export interface TimesheetEntry {
-  date: string;
-  hours: number;
-  project: string;
-  projectCategory: string;
-  task: string;
-  comments: string;
+  nextWeek() {
+    this.weekNumber += 7;
+    this.ngOnInit();
+  }
+  previousWeek() {
+    this.weekNumber -= 7;
+    this.ngOnInit();
+  }
 }
