@@ -33,8 +33,8 @@
         <a [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">Admin</a>
         <mat-menu #menu="matMenu">
           <span (mouseleave)="menuTrigger.closeMenu()">
-            <button mat-menu-item>Add/Edit Projects</button>
-            <button mat-menu-item>Review Timesheets</button>
+            <a href="/projects" mat-menu-item>Add/Edit Projects</a>
+            <a href="#" mat-menu-item>Review Timesheets</a>
           </span>
         </mat-menu>
         <a href="/dashboard">Dashboard</a>

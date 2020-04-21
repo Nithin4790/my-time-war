@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { TimesheetModule } from './modules/timesheet/timesheet.module';
+import { ProjectModule } from './modules/project/project.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { TimesheetModule } from './modules/timesheet/timesheet.module';
     SharedModule,
     DashboardModule,
     TimesheetModule,
+    ProjectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
