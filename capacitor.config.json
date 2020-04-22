@@ -1,0 +1,9 @@
+{
+  "appId": "com.app.mytime",
+  "appName": "MyTime",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "cordova": {},
+  "windowsAndroidStudioPath":"D:\\Softs\\android-studio\\bin\\studio64.exe"
+}
