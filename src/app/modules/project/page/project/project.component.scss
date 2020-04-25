@@ -1,8 +1,16 @@
 table {
-    width: 100%;
+  width: 100%;
 }
 
-.table-toolbar,
 button {
-    margin-left: 10px;
+  margin: 10px;
+}
+
+.toolbar {
+  max-width: 100%;
+  text-align: center;
+}
+.table-toolbar {
+  max-width: 100%;
+  margin-left: 10px;
 }

@@ -13,7 +13,6 @@ import { Project } from 'src/app/core/models/project.model';
 export class ProjectComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  constructor() {}
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -21,6 +20,7 @@ export class ProjectComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['select', 'position', 'project', 'projectCategory', 'task'];
+  data = Object.assign(SAMPLE_DATA);
   dataSource = new MatTableDataSource(SAMPLE_DATA);
   selection = new SelectionModel<Project>(true, []);
 
@@ -45,6 +45,18 @@ export class ProjectComponent implements OnInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+  removeSelectedRows() {
+    this.selection.selected.forEach((item) => {
+      const index: number = this.data.findIndex((d) => d === item);
+      this.data.splice(index, 1);
+      this.dataSource = new MatTableDataSource<Project>(this.data);
+    });
+    this.selection = new SelectionModel<Project>(true, []);
+  }
+
+  reloadPage() {
+    window.location.reload();
   }
 }
 

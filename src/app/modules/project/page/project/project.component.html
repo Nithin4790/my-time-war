@@ -4,8 +4,7 @@
       <mat-label>Search</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" />
     </mat-form-field>
-    <button mat-raised-button color="warn">Clear</button>
-    <button mat-raised-button color="primary">Add</button>
+    <button mat-raised-button color="primary" (click)="reloadPage()">Refresh</button>
   </div>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
@@ -59,5 +58,9 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  <div class="toolbar">
+    <button mat-raised-button color="primary">Add</button>
+    <button mat-raised-button color="warn" (click)="removeSelectedRows()">Remove</button>
   </div>
 </div>
