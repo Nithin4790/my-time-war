@@ -20,7 +20,7 @@
   "indent": {
     "options": ["spaces"]
   },
-  "max-classes-per-file": false,
+  "max-classes-per-file": [true, 140],
   "max-line-length": [true, 140],
   "member-ordering": [
     true,

@@ -10,7 +10,7 @@
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list *ngIf="isLogged">
       <a mat-list-item href="/dashboard">Dashboard</a>
       <a mat-list-item href="/timesheet">Timesheet</a>
       <a mat-list-item href="#">Logout</a>
@@ -30,16 +30,18 @@
       <span>MyTime</span>
       <span class="spacer"></span>
       <div class="web-layout-toolbar" *ngIf="!(isHandset$ | async)">
-        <a [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">Admin</a>
-        <mat-menu #menu="matMenu">
-          <span (mouseleave)="menuTrigger.closeMenu()">
-            <a href="/projects" mat-menu-item>Add/Edit Projects</a>
-            <a href="#" mat-menu-item>Review Timesheets</a>
-          </span>
-        </mat-menu>
-        <a href="/dashboard">Dashboard</a>
-        <a href="/timesheet">Timesheet</a>
-        <a href="#">Logout</a>
+        <div *ngIf="isLogged">
+          <a [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">Admin</a>
+          <mat-menu #menu="matMenu">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+              <a href="/projects" mat-menu-item>Add/Edit Projects</a>
+              <a href="#" mat-menu-item>Review Timesheets</a>
+            </span>
+          </mat-menu>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/timesheet">Timesheet</a>
+          <a href="/login" (click)="logoutUser()">Logout</a>
+        </div>
       </div>
     </mat-toolbar>
     <ng-content></ng-content>
