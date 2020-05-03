@@ -1,30 +1,36 @@
 import { AuthState } from './../state/auth.state';
-import { Authentication } from './../../core/models/authentication.model';
-import { Action, createReducer, on } from '@ngrx/store';
+import { AuthActions, EAuthActions } from './../actions/auth.actions';
 import { initialAuthState } from '../state/auth.state';
-import * as AuthActions from '../actions/auth.actions';
 
-export const authReducer = createReducer(
-  initialAuthState,
-  on(AuthActions.getAuth, (state) => ({
-    ...state,
-    isLoading: true,
-    error: null,
-  })),
-  on(AuthActions.getAuthSuccess, (state, payload: Authentication) => ({
-    ...state,
-    isLoading: false,
-    error: null,
-    token: payload.jwt,
-  })),
-  on(AuthActions.getAuthFail, (state, payload: { err: string }) => ({
-    ...state,
-    isLoading: false,
-    error: payload,
-    token: null,
-  }))
-);
-
-export function getAuthReducer(state: AuthState | undefined, action: Action) {
-  return authReducer(state, action);
-}
+export const authReducer = (
+  state = initialAuthState,
+  action: AuthActions
+): AuthState => {
+  switch (action.type) {
+    case EAuthActions.GetAuth: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case EAuthActions.GetAuthSuccess: {
+      return {
+        ...state,
+        isLoading: false,
+        token: action.payload,
+      };
+    }
+    case EAuthActions.GetAuthFail: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+    }
+    case EAuthActions.GetLogout: {
+      return initialAuthState;
+    }
+    default:
+      return state;
+  }
+};

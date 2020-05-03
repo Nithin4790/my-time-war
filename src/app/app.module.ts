@@ -21,7 +21,13 @@ import { AuthEffects } from './store/effects/auth.effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { rootReducer } from './store/reducers/root.reducer';
+
+// Services
 import { AuthenticationService } from './core/services/authentication.service';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthGuardService } from './core/services/auth-guard.service';
+import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,7 +46,18 @@ import { AuthenticationService } from './core/services/authentication.service';
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    AuthGuardService,
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+
+      useClass: HttpErrorInterceptor,
+
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

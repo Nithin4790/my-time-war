@@ -1,10 +1,14 @@
+import { ErrorMessages, ErrorMessage } from './../../../../core/models/models';
+import { Credential } from './../../../../core/models/credentials.model';
+import { Observable } from 'rxjs';
 import { RootState } from './../../../../store/state/root.state';
-import { getAuth } from './../../../../store/actions/auth.actions';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { selectAuth } from 'src/app/store/selectors/auth.selectors';
+import * as authSelectors from 'src/app/store/selectors/auth.selectors';
+import { GetAuth } from 'src/app/store/actions/auth.actions';
+import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
 
 @Component({
   selector: 'app-login',
@@ -12,46 +16,41 @@ import { selectAuth } from 'src/app/store/selectors/auth.selectors';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  authErrorObj: Observable<any>;
   form: FormGroup;
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
-  private returnUrl: string =
-    this.route.snapshot.queryParams.returnUrl || '/dashboard';
+  errorMessage: ErrorMessages[];
+  errorMessages: ErrorMessage[];
 
-  constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private store$: Store<RootState>
-  ) {}
-  ngOnInit(): void {
-    this.store$.dispatch(getAuth());
-
-    let authToken = '';
+  constructor(private fb: FormBuilder, private store$: Store<RootState>) {
+    this.authErrorObj = this.store$.select(authSelectors.selectAuthError);
+  }
+  ngOnInit() {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-
-    if (authToken !== null && authToken !== undefined) {
-      // this.router.navigate([this.returnUrl]);
-    }
-
-    // console.log(store.getState().login.token);
+    this.authErrorObj.subscribe((err) => {
+      this.errorMessage = err;
+      if (this.errorMessage !== null) {
+        //console.log(this.errorMessage);
+      }
+    });
   }
 
   onSubmit() {
-    let a = this.store$.pipe(select(selectAuth));
-    console.log(a);
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
-    const tokenField = 'jwt';
     if (this.form.valid) {
       try {
         const username = this.form.get('username').value;
         const password = this.form.get('password').value;
-
-        //this.router.navigate([this.returnUrl]);
+        const loginCreds: Credential = {
+          username,
+          password,
+        };
+        this.store$.dispatch(new GetAuth(loginCreds));
       } catch (err) {
         this.loginInvalid = true;
       }
@@ -59,15 +58,4 @@ export class LoginComponent implements OnInit {
       this.formSubmitAttempt = true;
     }
   }
-  // checkLogin() {
-  //   this.loginInvalid = false;
-  //   this.formSubmitAttempt = false;
-  //   this.authService.getAuthToken().subscribe((data) => {
-  //     if (data !== undefined) {
-  //       const tokenField = 'jwt';
-  //       store.dispatch(loginSuccess(data[tokenField]));
-  //       // console.log(store.getState().login.token);
-  //     }
-  //   });
-  // }
 }
