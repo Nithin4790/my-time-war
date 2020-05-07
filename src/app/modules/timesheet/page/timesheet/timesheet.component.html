@@ -1,14 +1,27 @@
 <div class="container">
   <div class="time-sheet-entries">
-    <mt-timesheet-entry *ngFor="let weekDay of weekDateEntries" [dateEntry]="weekDay"></mt-timesheet-entry>
+    <mt-timesheet-entry
+      *ngFor="let weekDay of weekDateEntries"
+      [dateEntry]="weekDay"
+    ></mt-timesheet-entry>
   </div>
   <div class="button-set">
-    <button mat-mini-fab color="primary" matTooltip="Previous week" (click)="previousWeek()">
+    <button
+      mat-mini-fab
+      color="primary"
+      matTooltip="Previous week"
+      (click)="previousWeek()"
+    >
       <mat-icon style="transform: rotate(180deg);">navigate_next</mat-icon>
     </button>
     <mt-reset-button></mt-reset-button>
     <mt-submit-button></mt-submit-button>
-    <button mat-mini-fab color="primary" matTooltip="Next week" (click)="nextWeek()">
+    <button
+      mat-mini-fab
+      color="primary"
+      matTooltip="Next week"
+      (click)="nextWeek()"
+    >
       <mat-icon>navigate_next</mat-icon>
     </button>
   </div>

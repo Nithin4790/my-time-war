@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './page/login/login.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthGuardService as AuthGuard } from './../../core/services/auth-guard.service';
 
 export const routes: Routes = [
   {

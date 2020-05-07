@@ -1,0 +1,49 @@
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutAlign="left"
+  fxLayoutAlign.xs="center"
+  fxLayoutGap="10px"
+>
+  <div class="item timesheet-form-row-1">
+    <mat-form-field class="project-name">
+      <mat-label>Project</mat-label>
+      <mat-select>
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="project-hours">
+      <mat-label>Hours</mat-label>
+      <input matInput type="number" min="1" />
+    </mat-form-field>
+  </div>
+  <div class="item timesheet-form-row-2">
+    <mat-form-field class="project-common">
+      <mat-label>Project Category</mat-label>
+      <mat-select>
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="item timesheet-form-row-3">
+    <mat-form-field class="project-common">
+      <mat-label>Task</mat-label>
+      <mat-select>
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="item timesheet-form-row-4">
+    <mat-form-field class="project-common">
+      <mat-label>Comments</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+  </div>
+  <div class="item timesheet-form-row-5">
+    <div class="buttons">
+      <mt-reset-button></mt-reset-button>
+      <mt-submit-button></mt-submit-button>
+    </div>
+  </div>
+</div>

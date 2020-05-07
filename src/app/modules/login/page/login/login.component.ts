@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../../../core/services/authentication.service';
 import { ErrorMessages, ErrorMessage } from './../../../../core/models/models';
 import { Credential } from './../../../../core/models/credentials.model';
 import { Observable } from 'rxjs';
@@ -23,10 +24,18 @@ export class LoginComponent implements OnInit {
   errorMessage: ErrorMessages[];
   errorMessages: ErrorMessage[];
 
-  constructor(private fb: FormBuilder, private store$: Store<RootState>) {
+  constructor(
+    private authService: AuthenticationService,
+    public router: Router,
+    private fb: FormBuilder,
+    private store$: Store<RootState>
+  ) {
     this.authErrorObj = this.store$.select(authSelectors.selectAuthError);
   }
   ngOnInit() {
+    if (this.authService.getToken()) {
+      this.router.navigateByUrl('/dashboard');
+    }
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],

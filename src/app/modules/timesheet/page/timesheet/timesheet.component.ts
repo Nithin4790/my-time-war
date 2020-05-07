@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TimesheetEntry, getTimesheetEntryInitialState } from 'src/app/core/models/timesheet-entry.model';
+import {
+  TimesheetEntryRow,
+  getTimesheetEntryRowInitialState,
+} from 'src/app/core/models/timesheet-entry.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'mt-timesheet',
@@ -7,25 +11,34 @@ import { TimesheetEntry, getTimesheetEntryInitialState } from 'src/app/core/mode
   styleUrls: ['./timesheet.component.scss'],
 })
 export class TimesheetComponent implements OnInit {
-  constructor() {}
+  timeSheetEntries: number = 1;
   weekNumber: number = 0;
-  weekDateEntry: TimesheetEntry;
-  weekDateEntries: Array<TimesheetEntry>;
-  dayNames: Array<string> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  weekDateEntry: TimesheetEntryRow;
+  weekDateEntries: TimesheetEntryRow[];
+  dayNames: string[] = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
   ngOnInit(): void {
     this.weekDateEntries = this.getDates(this.weekNumber);
   }
 
   getDates(weekNumber: number) {
-    let weekDays: Array<TimesheetEntry> = [];
-    let weekDay: TimesheetEntry = getTimesheetEntryInitialState();
-    let curr = new Date();
-    curr.setDate(curr.getDate() + weekNumber);
-    let firstday = new Date(curr.getTime() - 60 * 60 * 24 * curr.getDay() * 1000);
+    let weekDays: TimesheetEntryRow[] = [];
+    let weekDay: TimesheetEntryRow = getTimesheetEntryRowInitialState();
     for (let i = 0; i < 7; i++) {
       weekDay = {
         ...weekDay,
-        date: new Date(curr.getTime() + 60 * 60 * 24 * i * 1000).toISOString().slice(0, 10),
+        date: moment()
+          .add(weekNumber, 'week')
+          .startOf('week')
+          .add(i, 'days')
+          .format('yyyy-MM-DD'),
         dayName: this.dayNames[i],
       };
       weekDays = [...weekDays, weekDay];
@@ -33,11 +46,11 @@ export class TimesheetComponent implements OnInit {
     return weekDays;
   }
   nextWeek() {
-    this.weekNumber += 7;
+    this.weekNumber += 1;
     this.ngOnInit();
   }
   previousWeek() {
-    this.weekNumber -= 7;
+    this.weekNumber -= 1;
     this.ngOnInit();
   }
 }

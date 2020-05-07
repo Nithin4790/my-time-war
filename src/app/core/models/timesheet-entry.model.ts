@@ -1,4 +1,4 @@
-export interface TimesheetEntry {
+export interface TimesheetEntryRow {
   date: string;
   dayName: string;
   hours: number;
@@ -8,13 +8,13 @@ export interface TimesheetEntry {
   comments: string;
 }
 
-export function getTimesheetEntryInitialState(): TimesheetEntry {
+export function getTimesheetEntryRowInitialState(): TimesheetEntryRow {
   return {
     ...DEFAULT_TIMESHEET_ENTRY,
   };
 }
 
-export const DEFAULT_TIMESHEET_ENTRY: TimesheetEntry = {
+export const DEFAULT_TIMESHEET_ENTRY: TimesheetEntryRow = {
   date: '',
   dayName: '',
   hours: 0.0,

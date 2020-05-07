@@ -19,7 +19,13 @@ export class ProjectComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  displayedColumns: string[] = ['select', 'position', 'project', 'projectCategory', 'task'];
+  displayedColumns: string[] = [
+    'select',
+    'position',
+    'project',
+    'projectCategory',
+    'task',
+  ];
   data = Object.assign(SAMPLE_DATA);
   dataSource = new MatTableDataSource(SAMPLE_DATA);
   selection = new SelectionModel<Project>(true, []);
@@ -38,13 +44,17 @@ export class ProjectComponent implements OnInit {
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach((row) => this.selection.select(row));
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
   checkboxLabel(row?: Project): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.position + 1
+    }`;
   }
   removeSelectedRows() {
     this.selection.selected.forEach((item) => {
@@ -61,14 +71,64 @@ export class ProjectComponent implements OnInit {
 }
 
 const SAMPLE_DATA: Project[] = [
-  { position: 1, project: 'project1', projectCategory: 'projectCategory1', task: 'task1' },
-  { position: 2, project: 'project2', projectCategory: 'projectCategory2', task: 'task2' },
-  { position: 3, project: 'project3', projectCategory: 'projectCategory3', task: 'task3' },
-  { position: 4, project: 'project4', projectCategory: 'projectCategory4', task: 'task4' },
-  { position: 5, project: 'project5', projectCategory: 'projectCategory5', task: 'task5' },
-  { position: 6, project: 'project6', projectCategory: 'projectCategory6', task: 'task6' },
-  { position: 7, project: 'project7', projectCategory: 'projectCategory7', task: 'task7' },
-  { position: 8, project: 'project8', projectCategory: 'projectCategory8', task: 'task8' },
-  { position: 9, project: 'project9', projectCategory: 'projectCategory9', task: 'task9' },
-  { position: 10, project: 'project10', projectCategory: 'projectCategory10', task: 'task10' },
+  {
+    position: 1,
+    project: 'project1',
+    projectCategory: 'projectCategory1',
+    task: 'task1',
+  },
+  {
+    position: 2,
+    project: 'project2',
+    projectCategory: 'projectCategory2',
+    task: 'task2',
+  },
+  {
+    position: 3,
+    project: 'project3',
+    projectCategory: 'projectCategory3',
+    task: 'task3',
+  },
+  {
+    position: 4,
+    project: 'project4',
+    projectCategory: 'projectCategory4',
+    task: 'task4',
+  },
+  {
+    position: 5,
+    project: 'project5',
+    projectCategory: 'projectCategory5',
+    task: 'task5',
+  },
+  {
+    position: 6,
+    project: 'project6',
+    projectCategory: 'projectCategory6',
+    task: 'task6',
+  },
+  {
+    position: 7,
+    project: 'project7',
+    projectCategory: 'projectCategory7',
+    task: 'task7',
+  },
+  {
+    position: 8,
+    project: 'project8',
+    projectCategory: 'projectCategory8',
+    task: 'task8',
+  },
+  {
+    position: 9,
+    project: 'project9',
+    projectCategory: 'projectCategory9',
+    task: 'task9',
+  },
+  {
+    position: 10,
+    project: 'project10',
+    projectCategory: 'projectCategory10',
+    task: 'task10',
+  },
 ];

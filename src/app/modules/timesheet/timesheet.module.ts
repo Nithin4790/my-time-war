@@ -6,6 +6,7 @@ import { TimesheetEntryComponent } from './components/timesheet-entry/timesheet-
 import { MaterialModule } from 'src/app/shared/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthGuardService as AuthGuard } from './../../core/services/auth-guard.service';
+import { TimesheetEntryRowComponent } from './components/timesheet-entry-row/timesheet-entry-row.component';
 
 export const routes: Routes = [
   {
@@ -16,7 +17,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TimesheetComponent, TimesheetEntryComponent],
+  declarations: [TimesheetComponent, TimesheetEntryComponent, TimesheetEntryRowComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

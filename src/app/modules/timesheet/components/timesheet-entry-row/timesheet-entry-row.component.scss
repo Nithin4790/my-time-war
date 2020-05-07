@@ -1,0 +1,29 @@
+mat-form-field {
+  padding: 5px;
+}
+
+button {
+  margin: 5px;
+}
+
+mat-panel-title {
+  max-width: 100px;
+}
+
+@media (max-width: 600px) {
+  .project-hours {
+    max-width: 30%;
+  }
+
+  .project-name {
+    max-width: 60%;
+  }
+
+  .project-common {
+    min-width: 90%;
+  }
+
+  .buttons {
+    text-align: center;
+  }
+}

@@ -28,6 +28,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthGuardService } from './core/services/auth-guard.service';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -50,6 +51,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AuthenticationService,
     AuthGuardService,
     CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
 
